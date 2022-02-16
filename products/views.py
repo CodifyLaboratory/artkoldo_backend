@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from rest_framework import filters
+from rest_framework.viewsets import ReadOnlyModelViewSet
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+from .filters import PaintingFilter
+
 
 from .models import Origin, Author, Color, \
     Subject, PaintMaterial, Style, PaintTechnique, Painting, \
@@ -9,8 +13,6 @@ from .serializers import OriginSerializer, AuthorSerializer, ColorSerializer, \
     SubjectSerializer, PaintMaterialSerializer, StyleSerializer, PaintTechniqueSerializer, PaintingSerializer, \
     HandicraftTypeSerializer, HandicraftMaterialSerializer, HandicraftTechniqueSerializer, HandicraftSerializer, \
     CeramicTypeSerializer, CeramicMaterialSerializer, CeramicTechniqueSerializer, CeramicSerializer
-from rest_framework.viewsets import ReadOnlyModelViewSet
-from django_filters.rest_framework import DjangoFilterBackend
 
 
 class OriginViewSet(ReadOnlyModelViewSet):
@@ -54,9 +56,10 @@ class PaintTechniqueViewSet(ReadOnlyModelViewSet):
 class PaintingViewSet(ReadOnlyModelViewSet):
     queryset = Painting.objects.all()
     serializer_class = PaintingSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['subject', 'material', 'style', 'technique', 'color', 'width', 'height']
-    search_fields = ['title', 'style__title', 'subject__title', 'description', 'color__title', 'keywords', 'technique__title']
+    filterset_class = PaintingFilter
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    search_fields = ['title', 'description', 'color__title', 'author__origin__country', 'author__origin__region',
+                     'author__name', 'keywords', 'style__title', 'subject__title', 'technique__title', 'material__title']
     ordering_fields = ['price']
 
 
@@ -81,10 +84,10 @@ class HandicraftTechniqueViewSet(ReadOnlyModelViewSet):
 class HandicraftViewSet(ReadOnlyModelViewSet):
     queryset = Handicraft.objects.all()
     serializer_class = HandicraftSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['type', 'material', 'technique', 'color']
-    search_fields = ['title', 'type__title', 'material__title', 'description', 'color__title', 'keywords', 'technique__title']
-    ordering_fields = ['price']
+    # filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    # filterset_fields = ['type', 'material', 'technique', 'color']
+    # search_fields = ['title', 'type__title', 'material__title', 'description', 'color__title', 'keywords', 'technique__title']
+    # ordering_fields = ['price']
 
 
 '''
@@ -108,7 +111,7 @@ class CeramicTechniqueViewSet(ReadOnlyModelViewSet):
 class CeramicViewSet(ReadOnlyModelViewSet):
     queryset = Ceramic.objects.all()
     serializer_class = CeramicSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['type', 'material', 'technique', 'color']
-    search_fields = ['title', 'type__title', 'material__title', 'description', 'color__title', 'keywords', 'technique__title']
-    ordering_fields = ['price']
+    # filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    # filterset_fields = ['type', 'material', 'technique', 'color']
+    # search_fields = ['title', 'type__title', 'material__title', 'description', 'color__title', 'keywords', 'technique__title']
+    # ordering_fields = ['price']

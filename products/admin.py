@@ -4,23 +4,26 @@ from .models import Subject, PaintMaterial, Style, PaintTechnique, Painting
 from .models import HandicraftType, HandicraftMaterial, HandicraftTechnique, Handicraft
 from .models import CeramicType, CeramicMaterial, CeramicTechnique, Ceramic
 
+class SiteAdmin(admin.ModelAdmin):
+    readonly_fields = ('id',)
 
-admin.site.register(Origin)
-admin.site.register(Author)
-admin.site.register(Color)
 
-admin.site.register(Painting)
-admin.site.register(Subject)
-admin.site.register(PaintMaterial)
-admin.site.register(Style)
-admin.site.register(PaintTechnique)
+admin.site.register(Origin, SiteAdmin)
+admin.site.register(Author, SiteAdmin)
+admin.site.register(Color, SiteAdmin)
 
-admin.site.register(HandicraftType)
-admin.site.register(HandicraftMaterial)
-admin.site.register(HandicraftTechnique)
-admin.site.register(Handicraft)
+admin.site.register(Subject, SiteAdmin)
+admin.site.register(PaintMaterial, SiteAdmin)
+admin.site.register(Style, SiteAdmin)
+admin.site.register(PaintTechnique, SiteAdmin)
+admin.site.register(Painting, SiteAdmin)
 
-admin.site.register(CeramicType)
-admin.site.register(CeramicMaterial)
-admin.site.register(CeramicTechnique)
-admin.site.register(Ceramic)
+admin.site.register(HandicraftType, SiteAdmin)
+admin.site.register(HandicraftMaterial, SiteAdmin)
+admin.site.register(HandicraftTechnique, SiteAdmin)
+admin.site.register(Handicraft, SiteAdmin)
+
+admin.site.register(CeramicType, SiteAdmin)
+admin.site.register(CeramicMaterial, SiteAdmin)
+admin.site.register(CeramicTechnique, SiteAdmin)
+admin.site.register(Ceramic, SiteAdmin)
