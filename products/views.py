@@ -58,7 +58,7 @@ class PaintingViewSet(ReadOnlyModelViewSet):
     serializer_class = PaintingSerializer
     filterset_class = PaintingFilter
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    search_fields = ['title', 'description', 'color__title', 'author__region__country', 'author__region__title',
+    search_fields = ['title', 'description', 'color__title', 'author__region__country__title', 'author__region__title',
                      'author__name', 'keywords', 'style__title', 'subject__title', 'technique__title', 'material__title']
     ordering_fields = ['price']
 
