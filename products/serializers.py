@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from .models import Origin, Author, Color, \
+from .models import Region, Author, Color, \
     Subject, PaintMaterial, Style, PaintTechnique, Painting, \
     HandicraftType, HandicraftMaterial, HandicraftTechnique, Handicraft, \
     CeramicType, CeramicMaterial, CeramicTechnique, Ceramic
 
 
-class OriginSerializer(serializers.ModelSerializer):
+class RegionSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Origin
+        model = Region
         fields = ['country', 'region']
 
 

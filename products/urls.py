@@ -1,6 +1,6 @@
 from rest_framework.routers import DefaultRouter
 
-from .views import OriginViewSet, AuthorViewSet, ColorViewSet, \
+from .views import RegionViewSet, AuthorViewSet, ColorViewSet, \
     SubjectViewSet, PaintMaterialViewSet, StyleViewSet, PaintTechniqueViewSet, PaintingViewSet, \
     HandicraftTypeViewSet, HandicraftMaterialViewSet, HandicraftTechniqueViewSet, HandicraftViewSet, \
     CeramicTypeViewSet, CeramicMaterialViewSet, CeramicTechniqueViewSet, CeramicViewSet

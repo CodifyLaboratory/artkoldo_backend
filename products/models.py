@@ -4,24 +4,35 @@ from django.db import models
 '''
     Universal attributes
 '''
-class Origin(models.Model):
-    country = models.CharField(max_length=100, verbose_name='Страна', null=True, blank=True)
-    region = models.CharField(max_length=100, verbose_name='Область', null=True, blank=True)
+class Country(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Страна', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Страна'
+        verbose_name_plural = "Страны"
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
+class Region(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Область', null=True, blank=True)
+    country = models.ForeignKey(Country, on_delete=models.PROTECT, verbose_name='Страна', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Регион'
         verbose_name_plural = "Регионы"
-        ordering = ['country']
+        ordering = ['title']
 
     def __str__(self):
-        return f'{self.country}, {self.region}'
+        return f'{self.title}, {self.country}'
 
 
 class Author(models.Model):
     name = models.CharField(max_length=255, verbose_name='Ф.И. автора', null=True, blank=True)
     phone_number = models.CharField(max_length=13, verbose_name='Номер телефона', null=True, blank=True)
     about = models.TextField(verbose_name='Об авторе', null=True, blank=True)
-    origin = models.ForeignKey(Origin, on_delete=models.PROTECT, verbose_name='Регион', null=True, blank=True)
+    region = models.ForeignKey(Region, on_delete=models.PROTECT, verbose_name='Регион', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Автора'

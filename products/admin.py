@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Origin, Author, Color
+from .models import Country, Region, Author, Color
 from .models import Subject, PaintMaterial, Style, PaintTechnique, Painting
 from .models import HandicraftType, HandicraftMaterial, HandicraftTechnique, Handicraft
 from .models import CeramicType, CeramicMaterial, CeramicTechnique, Ceramic
@@ -8,7 +8,13 @@ class SiteAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
 
 
-admin.site.register(Origin, SiteAdmin)
+class CountryAdmin(admin.ModelAdmin):
+    readonly_fields = ('id',)
+    list_filter = ('country',)
+
+
+admin.site.register(Country, SiteAdmin)
+admin.site.register(Region, CountryAdmin)
 admin.site.register(Author, SiteAdmin)
 admin.site.register(Color, SiteAdmin)
 

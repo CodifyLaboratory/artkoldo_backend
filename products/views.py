@@ -5,19 +5,19 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from .filters import PaintingFilter
 
 
-from .models import Origin, Author, Color, \
+from .models import Region, Author, Color, \
     Subject, PaintMaterial, Style, PaintTechnique, Painting, \
     HandicraftType, HandicraftMaterial, HandicraftTechnique, Handicraft, \
     CeramicType, CeramicMaterial, CeramicTechnique, Ceramic
-from .serializers import OriginSerializer, AuthorSerializer, ColorSerializer, \
+from .serializers import RegionSerializer, AuthorSerializer, ColorSerializer, \
     SubjectSerializer, PaintMaterialSerializer, StyleSerializer, PaintTechniqueSerializer, PaintingSerializer, \
     HandicraftTypeSerializer, HandicraftMaterialSerializer, HandicraftTechniqueSerializer, HandicraftSerializer, \
     CeramicTypeSerializer, CeramicMaterialSerializer, CeramicTechniqueSerializer, CeramicSerializer
 
 
-class OriginViewSet(ReadOnlyModelViewSet):
-    queryset = Origin.objects.all()
-    serializer_class = OriginSerializer
+class RegionViewSet(ReadOnlyModelViewSet):
+    queryset = Region.objects.all()
+    serializer_class = RegionSerializer
 
 
 class AuthorViewSet(ReadOnlyModelViewSet):
@@ -58,7 +58,7 @@ class PaintingViewSet(ReadOnlyModelViewSet):
     serializer_class = PaintingSerializer
     filterset_class = PaintingFilter
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    search_fields = ['title', 'description', 'color__title', 'author__origin__country', 'author__origin__region',
+    search_fields = ['title', 'description', 'color__title', 'author__region__country', 'author__region__title',
                      'author__name', 'keywords', 'style__title', 'subject__title', 'technique__title', 'material__title']
     ordering_fields = ['price']
 

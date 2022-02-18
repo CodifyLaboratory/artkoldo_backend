@@ -1,6 +1,6 @@
 from django.forms import CheckboxSelectMultiple
 from django_filters import rest_framework as filters
-from .models import Origin, Author, Color, \
+from .models import Region, Author, Color, \
     Subject, PaintMaterial, Style, PaintTechnique, Painting, \
     HandicraftType, HandicraftMaterial, HandicraftTechnique, Handicraft, \
     CeramicType, CeramicMaterial, CeramicTechnique, Ceramic
@@ -18,16 +18,12 @@ class PaintingFilter(filters.FilterSet):
     max_height = filters.NumberFilter(field_name="height", lookup_expr='lte', label='Высота макс.')
     min_price = filters.NumberFilter(field_name="price", lookup_expr='gte', label='Цена мин.')
     max_price = filters.NumberFilter(field_name="price", lookup_expr='lte', label='Цена макс.')
-    author__origin = filters.ModelMultipleChoiceFilter(queryset=Origin.objects.all(),
-                                                       widget=CheckboxSelectMultiple, label="Регион")
-
-    # country = filters.ModelMultipleChoiceFilter(queryset=Origin.region, widget=CheckboxSelectMultiple(), label="Страна")
-    # region = filters.ModelMultipleChoiceFilter(queryset=Origin.region, widget=CheckboxSelectMultiple(), label="Регион")
+    author__region = filters.ModelMultipleChoiceFilter(queryset=Region.objects.all(), widget=CheckboxSelectMultiple(), label="Регион")
 
     class Meta:
         model = Painting
         fields = ['subject', 'material', 'style', 'technique', 'color', 'min_price', 'max_price', 'min_width',
-                  'max_width', 'min_height', 'max_height', 'author__origin']
+                  'max_width', 'min_height', 'max_height', 'author__region']
 
 
 class HandicraftFilter(filters.FilterSet):
@@ -37,7 +33,7 @@ class HandicraftFilter(filters.FilterSet):
     color = filters.ModelMultipleChoiceFilter(queryset=Color.objects.all(), widget=CheckboxSelectMultiple(), label="Цвет")
     min_price = filters.NumberFilter(field_name="price", lookup_expr='gte', label='Цена мин.')
     max_price = filters.NumberFilter(field_name="price", lookup_expr='lte', label='Цена макс.')
-    origin = filters.ModelMultipleChoiceFilter(queryset=Origin.objects.all(), widget=CheckboxSelectMultiple(), label="Регион")
+    region = filters.ModelMultipleChoiceFilter(queryset=Region.objects.all(), widget=CheckboxSelectMultiple(), label="Регион")
 
     class Meta:
         model = Handicraft
