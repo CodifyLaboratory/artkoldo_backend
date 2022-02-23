@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,10 +48,12 @@ INSTALLED_APPS = [
 
     # third party
     'rest_framework',
+    'drf_multiple_model',
     'django_filters',
 
+
     # my apps
-    'products'
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -90,8 +93,12 @@ WSGI_APPLICATION = 'artkoldo_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env('DB_ENGINE'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -143,4 +150,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+# JAZZMIN
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Arkoldo Admin",
+    "site_header": "Artkoldo",
+    "site_brand": "Artkoldo",
+    "welcome_sign": "Welcome to Arkoldo admin panel",
+    "show_sidebar": True,
+    "user_avatar": None,
+    "changeform_format": "single",
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+}
+
+JAZZMIN_UI_TWEAKS = {
+    # "theme": "darkly",
+    # "theme": "flatly",
+    # "theme": "slate",
+    "dark_mode_theme": "cyborg",
 }

@@ -1,29 +1,38 @@
 from rest_framework import serializers
-from .models import Region, Author, Color, \
+from .models import Country, Region, Author, Color, \
     Subject, PaintMaterial, Style, PaintTechnique, Painting, \
     HandicraftType, HandicraftMaterial, HandicraftTechnique, Handicraft, \
     CeramicType, CeramicMaterial, CeramicTechnique, Ceramic
 
 
+class CountrySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Country
+        fields = ['title']
+
+
 class RegionSerializer(serializers.ModelSerializer):
+    country = CountrySerializer()
 
     class Meta:
         model = Region
-        fields = ['country', 'region']
+        fields = ['id', 'title', 'country']
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+    region = RegionSerializer()
 
     class Meta:
         model = Author
-        fields = ['name', 'about', 'origin']
+        fields = ['name', 'about', 'region']
 
 
 class ColorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Color
-        fields = ['title', 'code']
+        fields = ['id', 'title', 'code']
 
 
 '''
@@ -33,35 +42,42 @@ class SubjectSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Subject
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class PaintMaterialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PaintMaterial
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class StyleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Style
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class PaintTechniqueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PaintTechnique
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class PaintingSerializer(serializers.ModelSerializer):
+    subject = SubjectSerializer()
+    material = PaintMaterialSerializer()
+    style = StyleSerializer()
+    technique = PaintTechniqueSerializer()
+    color = ColorSerializer(many=True)
+    author = AuthorSerializer()
 
     class Meta:
         model = Painting
-        fields = '__all__'
+        fields = ['title', 'photo', 'description', 'keywords', 'width', 'height', 'price', 'subject', 'material',
+                  'style', 'technique', 'color', 'author']
 
 
 '''
@@ -71,21 +87,21 @@ class HandicraftTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HandicraftType
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class HandicraftMaterialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HandicraftMaterial
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class HandicraftTechniqueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = HandicraftTechnique
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class HandicraftSerializer(serializers.ModelSerializer):
@@ -102,21 +118,21 @@ class CeramicTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CeramicType
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class CeramicMaterialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CeramicMaterial
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class CeramicTechniqueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CeramicTechnique
-        fields = ['title']
+        fields = ['id', 'title']
 
 
 class CeramicSerializer(serializers.ModelSerializer):
