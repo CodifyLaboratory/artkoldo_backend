@@ -1,6 +1,6 @@
 from django.forms import CheckboxSelectMultiple
 from django_filters import rest_framework as filters
-from .models import Region, Author, Color, \
+from .models import Region, Color, \
     Subject, PaintMaterial, Style, PaintTechnique, Painting, \
     HandicraftType, HandicraftMaterial, HandicraftTechnique, Handicraft, \
     CeramicType, CeramicMaterial, CeramicTechnique, Ceramic
@@ -33,9 +33,22 @@ class HandicraftFilter(filters.FilterSet):
     color = filters.ModelMultipleChoiceFilter(queryset=Color.objects.all(), widget=CheckboxSelectMultiple(), label="Цвет")
     min_price = filters.NumberFilter(field_name="price", lookup_expr='gte', label='Цена мин.')
     max_price = filters.NumberFilter(field_name="price", lookup_expr='lte', label='Цена макс.')
-    region = filters.ModelMultipleChoiceFilter(queryset=Region.objects.all(), widget=CheckboxSelectMultiple(), label="Регион")
+    author__region = filters.ModelMultipleChoiceFilter(queryset=Region.objects.all(), widget=CheckboxSelectMultiple(), label="Регион")
 
     class Meta:
         model = Handicraft
-        fields = ['type', 'material', 'technique', 'color', 'min_price', 'max_price']
+        fields = ['type', 'material', 'technique', 'color', 'min_price', 'max_price', 'author__region']
 
+
+class CeramicFilter(filters.FilterSet):
+    type = filters.ModelMultipleChoiceFilter(queryset=CeramicType.objects.all(), widget=CheckboxSelectMultiple(), label="Тип товара")
+    material = filters.ModelMultipleChoiceFilter(queryset=CeramicMaterial.objects.all(), widget=CheckboxSelectMultiple(), label="Материал")
+    technique = filters.ModelMultipleChoiceFilter(queryset=CeramicTechnique.objects.all(), widget=CheckboxSelectMultiple(), label="Техника")
+    color = filters.ModelMultipleChoiceFilter(queryset=Color.objects.all(), widget=CheckboxSelectMultiple(), label="Цвет")
+    min_price = filters.NumberFilter(field_name="price", lookup_expr='gte', label='Цена мин.')
+    max_price = filters.NumberFilter(field_name="price", lookup_expr='lte', label='Цена макс.')
+    author__region = filters.ModelMultipleChoiceFilter(queryset=Region.objects.all(), widget=CheckboxSelectMultiple(), label="Регион")
+
+    class Meta:
+        model = Ceramic
+        fields = ['type', 'material', 'technique', 'color', 'min_price', 'max_price', 'author__region']
