@@ -77,4 +77,3 @@ class CeramicFilterViewSet(ObjectMultipleModelAPIViewSet):
         {'queryset': Color.objects.all(), 'serializer_class': ColorSerializer},
         {'queryset': Region.objects.all(), 'serializer_class': RegionSerializer},
     ]
-
