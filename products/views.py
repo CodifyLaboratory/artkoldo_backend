@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from .pagination import ProductsPagination
 from drf_multiple_model.viewsets import ObjectMultipleModelAPIViewSet
 
 from django_filters.rest_framework import DjangoFilterBackend
@@ -18,6 +19,7 @@ from .serializers import RegionSerializer, AuthorSerializer, ColorSerializer, \
 class PaintingViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Painting.objects.all()
     serializer_class = PaintingSerializer
+    pagination_class = ProductsPagination
 
     filterset_class = PaintingFilter
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -40,6 +42,7 @@ class PaintingFilterViewSet(ObjectMultipleModelAPIViewSet):
 class HandicraftViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Handicraft.objects.all()
     serializer_class = HandicraftSerializer
+    pagination_class = ProductsPagination
 
     filterset_class = HandicraftFilter
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
@@ -61,6 +64,7 @@ class HandicraftFilterViewSet(ObjectMultipleModelAPIViewSet):
 class CeramicViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Ceramic.objects.all()
     serializer_class = CeramicSerializer
+    pagination_class = ProductsPagination
 
     filterset_class = CeramicFilter
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
