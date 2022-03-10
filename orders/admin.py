@@ -1,19 +1,11 @@
 from django.contrib import admin
-from .models import PaintingOrder, HandicraftOrder, CeramicOrder
+from .models import Order, OrderStatus
 
 
-class PaintingOrderAdmin(admin.ModelAdmin):
-    list_filter = ("customer_name", "phone_number", "order_status")
+class OrderAdmin(admin.ModelAdmin):
+    """Фильтрация в админ панели"""
+    list_filter = ("name", "phone", "order_status")
 
 
-class HandicraftOrderAdmin(admin.ModelAdmin):
-    list_filter = ("customer_name", "phone_number", "order_status")
-
-
-class CeramicOrderAdmin(admin.ModelAdmin):
-    list_filter = ("customer_name", "phone_number", "order_status")
-
-
-admin.site.register(PaintingOrder, PaintingOrderAdmin)
-admin.site.register(HandicraftOrder, HandicraftOrderAdmin)
-admin.site.register(CeramicOrder, CeramicOrderAdmin)
+admin.site.register(Order, OrderAdmin)
+admin.site.register(OrderStatus)

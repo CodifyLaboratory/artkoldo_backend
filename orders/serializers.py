@@ -1,97 +1,46 @@
 from rest_framework import serializers
-from .models import PaintingOrder, HandicraftOrder, CeramicOrder
-from products.models import Painting, Handicraft, Ceramic
-from products.serializers import PaintingSerializer, HandicraftSerializer, CeramicSerializer
+from .models import OrderStatus, Order
 
 
-class PaintingOrderSerializer(serializers.ModelSerializer):
-    price = serializers.ReadOnlyField()
-    total_sum = serializers.ReadOnlyField()
-    order_status = serializers.ReadOnlyField()
-    created = serializers.ReadOnlyField()
+class OrderStatusSerializer(serializers.ModelSerializer):
+    title = serializers.ReadOnlyField(allow_null=True)
 
     class Meta:
-        model = PaintingOrder
-        fields = '__all__'
-
-    def create(self, validated_data):
-        product = validated_data.get('product')
-        product = Painting.objects.get(id=product.id)
-        total_sum = validated_data['quantity'] * product.price
-        price = product.price
-        order = PaintingOrder.objects.create(
-            price=price,
-            total_sum=total_sum,
-            customer_name=validated_data['customer_name'],
-            phone_number=validated_data['phone_number'],
-            product=validated_data['product'],
-            quantity=validated_data['quantity'],
-        )
-        return order
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['product'] = PaintingSerializer(instance=instance.product).data
-        return response
+        model = OrderStatus
+        fields = ['id', 'title']
 
 
-class HandicraftOrderSerializer(serializers.ModelSerializer):
-    price = serializers.ReadOnlyField()
-    total_sum = serializers.ReadOnlyField()
-    order_status = serializers.ReadOnlyField()
-    created = serializers.ReadOnlyField()
+class OrderSerializer(serializers.ModelSerializer):
+    created_date = serializers.ReadOnlyField()
+    order_status = OrderStatusSerializer(default=1)
 
     class Meta:
-        model = HandicraftOrder
+        model = Order
         fields = '__all__'
 
-    def create(self, validated_data):
-        product = validated_data.get('product')
-        product = Handicraft.objects.get(id=product.id)
-        total_sum = validated_data['quantity'] * product.price
-        price = product.price
-        order = HandicraftOrder.objects.create(
-            price=price,
-            total_sum=total_sum,
-            customer_name=validated_data['customer_name'],
-            phone_number=validated_data['phone_number'],
-            product=validated_data['product'],
-            quantity=validated_data['quantity'],
-        )
-        return order
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['product'] = HandicraftSerializer(instance=instance.product).data
-        return response
-
-
-class CeramicOrderSerializer(serializers.ModelSerializer):
-    price = serializers.ReadOnlyField()
-    total_sum = serializers.ReadOnlyField()
-    order_status = serializers.ReadOnlyField()
-    created = serializers.ReadOnlyField()
-
-    class Meta:
-        model = CeramicOrder
-        fields = '__all__'
+    def validate(self, attrs):
+        attrs = super().validate(attrs)
+        total_price = attrs['total_price']
+        if total_price <= 0:
+            raise serializers.ValidationError(
+                detail='Итоговая стоимость заказа не может иметь отрицательное значение.',
+                code='negative_number_value'
+            )
+        return attrs
 
     def create(self, validated_data):
-        product = validated_data.get('product')
-        product = Ceramic.objects.get(id=product.id)
-        total_sum = validated_data['quantity'] * product.price
-        price = product.price
-        order = CeramicOrder.objects.create(
-            price=price,
-            total_sum=total_sum,
-            customer_name=validated_data['customer_name'],
-            phone_number=validated_data['phone_number'],
-            product=validated_data['product'],
+        order = Order.objects.create(
+            name=validated_data['name'],
+            email=validated_data['email'],
+            phone=validated_data['phone'],
+            country=validated_data['country'],
+            region=validated_data['region'],
+            city=validated_data['city'],
+            comment=validated_data['comment'],
+            total_price=validated_data['total_price'],
             quantity=validated_data['quantity'],
+            price=validated_data['price'],
+            products_id=validated_data['products_id'],
+            product_name=validated_data['product_name'],
         )
         return order
-
-    def to_representation(self, instance):
-        response = super().to_representation(instance)
-        response['product'] = CeramicSerializer(instance=instance.product).data
-        return response

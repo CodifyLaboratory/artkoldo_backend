@@ -1,59 +1,38 @@
 from django.db import models
-from products.models import Painting, Handicraft, Ceramic
 
 
-class PaintingOrder(models.Model):
-    customer_name = models.CharField(max_length=100, verbose_name='Имя заказчика')
-    phone_number = models.CharField(max_length=14, verbose_name='Номер телефона заказчика')
-    product = models.ForeignKey(Painting, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Заказанная картина')
-    quantity = models.PositiveIntegerField(blank=True, null=True, verbose_name='Количество')
-    price = models.PositiveIntegerField(blank=True, null=True, verbose_name='Цена за единицу')
-    total_sum = models.PositiveIntegerField(blank=True, null=True, verbose_name=' Общая сумма')
-    order_status = models.BooleanField(default=False, verbose_name='Статус заказа')
-    created = models.DateTimeField(auto_now=True, verbose_name='Дата заказа')
+class OrderStatus(models.Model):
+    title = models.CharField(max_length=250, verbose_name='Статус заказа')
 
     class Meta:
-        verbose_name = 'Заказ картины'
-        verbose_name_plural = "Заказ картин"
-        ordering = ['-created']
+        verbose_name = 'Статус заказа'
+        verbose_name_plural = "Статусы заказа"
+        ordering = ['title']
 
     def __str__(self):
-        return f'{self.customer_name} {self.product}'
+        return self.title
 
 
-class HandicraftOrder(models.Model):
-    customer_name = models.CharField(max_length=100, verbose_name='Имя заказчика')
-    phone_number = models.CharField(max_length=14, verbose_name='Номер телефона заказчика')
-    product = models.ForeignKey(Handicraft, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Заказанное ремесленное изделие')
-    quantity = models.PositiveIntegerField(blank=True, null=True, verbose_name='Количество')
-    price = models.PositiveIntegerField(blank=True, null=True, verbose_name='Цена за единицу')
-    total_sum = models.PositiveIntegerField(blank=True, null=True, verbose_name=' Общая сумма')
-    order_status = models.BooleanField(default=False, verbose_name='Статус заказа')
-    created = models.DateTimeField(auto_now=True, verbose_name='Дата заказа')
+class Order(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Имя заказчика')
+    email = models.EmailField(verbose_name='Почта')
+    phone = models.CharField(max_length=100, verbose_name='Номер телефона')
+    country = models.CharField(max_length=250, verbose_name='Страна доставки')
+    region = models.CharField(max_length=250, verbose_name='Область')
+    city = models.CharField(max_length=250, verbose_name='Город/Населенный пункт')
+    comment = models.CharField(max_length=255, verbose_name='Комментарии к заказу')
+    created_date = models.DateTimeField(verbose_name='Дата создания заказа', auto_now_add=True)
+    total_price = models.FloatField(verbose_name='Итоговая стоимость заказа')
+    order_status = models.ForeignKey(OrderStatus, on_delete=models.CASCADE, verbose_name='Статус Заказа', default=1)
+    quantity = models.PositiveIntegerField(verbose_name='Количество')
+    price = models.PositiveIntegerField(verbose_name='Цена за единицу')
+    products_id = models.PositiveIntegerField(verbose_name='Артикул товара')
+    product_name = models.CharField(max_length=255, verbose_name='Наименование товара')
 
     class Meta:
-        verbose_name = 'Заказ ремесленного изделия'
-        verbose_name_plural = "Заказ ремесленных изделий"
-        ordering = ['-created']
+        verbose_name = 'Заказ'
+        verbose_name_plural = "Заказы"
+        ordering = ['created_date']
 
     def __str__(self):
-        return f'{self.customer_name} {self.product}'
-
-
-class CeramicOrder(models.Model):
-    customer_name = models.CharField(max_length=100, verbose_name='Имя заказчика')
-    phone_number = models.CharField(max_length=14, verbose_name='Номер телефона заказчика')
-    product = models.ForeignKey(Ceramic, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Заказанное керамическое изделие')
-    quantity = models.PositiveIntegerField(blank=True, null=True, verbose_name='Количество')
-    price = models.PositiveIntegerField(blank=True, null=True, verbose_name='Цена за единицу')
-    total_sum = models.PositiveIntegerField(blank=True, null=True, verbose_name=' Общая сумма')
-    order_status = models.BooleanField(default=False, verbose_name='Статус заказа')
-    created = models.DateTimeField(auto_now=True, verbose_name='Дата заказа')
-
-    class Meta:
-        verbose_name = 'Заказ керамического изделия'
-        verbose_name_plural = "Заказ керамических изделий"
-        ordering = ['-created']
-
-    def __str__(self):
-        return f'{self.customer_name} {self.product}'
+        return f' Имя заказчика: {self.name} | статус заказа: {self.order_status}'
