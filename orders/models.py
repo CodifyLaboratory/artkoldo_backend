@@ -2,7 +2,7 @@ from django.db import models
 
 
 class OrderStatus(models.Model):
-    title = models.CharField(max_length=250, verbose_name='Статус заказа')
+    title = models.CharField(max_length=250, verbose_name='Статус заказа', unique=True)
 
     class Meta:
         verbose_name = 'Статус заказа'
@@ -28,6 +28,7 @@ class Order(models.Model):
     price = models.PositiveIntegerField(verbose_name='Цена за единицу')
     products_id = models.PositiveIntegerField(verbose_name='Артикул товара')
     product_name = models.CharField(max_length=255, verbose_name='Наименование товара')
+    products_category = models.CharField(max_length=250, verbose_name='Категория товара', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Заказ'

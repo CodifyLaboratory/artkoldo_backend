@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import OrderStatus, Order
+from rest_framework.validators import UniqueValidator
 
 
 class OrderStatusSerializer(serializers.ModelSerializer):
@@ -42,5 +43,6 @@ class OrderSerializer(serializers.ModelSerializer):
             price=validated_data['price'],
             products_id=validated_data['products_id'],
             product_name=validated_data['product_name'],
+            products_category=validated_data['products_category']
         )
         return order
