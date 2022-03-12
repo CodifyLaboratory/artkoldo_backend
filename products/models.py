@@ -36,16 +36,17 @@ class Region(models.Model):
 
 
 class Author(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Ф.И. автора', null=True, blank=True, unique=True)
-    phone_number = models.CharField(max_length=13, verbose_name='Номер телефона', null=True, blank=True, unique=True)
-    about = models.TextField(verbose_name='Об авторе', null=True, blank=True, unique=True)
+    name = models.CharField(max_length=255, verbose_name='Ф.И. автора', null=True, blank=True)
+    phone_number = models.CharField(max_length=14, verbose_name='Номер телефона', null=True, blank=True, unique=True)
+    about = models.TextField(verbose_name='Об авторе', null=True, blank=True)
     region = models.ForeignKey(Region, on_delete=models.PROTECT, verbose_name='Регион', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Автора'
         verbose_name_plural = "Авторы"
         ordering = ['name']
-        unique_together = (("name", "phone_number", "about", "region"),)
+        unique_together = (("name", "phone_number", "region"),)
 
     def __str__(self):
         return self.name
@@ -120,9 +121,9 @@ class PaintTechnique(models.Model):
 
 class Painting(models.Model):
     category = 'Paintings'
-    title = models.CharField(max_length=100, verbose_name='Название картины', null=True, blank=True, unique=True)
-    photo = models.ImageField(verbose_name='Фото', upload_to='paintings_images', null=True, blank=True, unique=True)
-    description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True, unique=True)
+    title = models.CharField(max_length=100, verbose_name='Название картины', null=True, blank=True)
+    photo = models.ImageField(verbose_name='Фото', upload_to='paintings_images', null=True, blank=True)
+    description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, verbose_name='Тема', null=True, blank=True)
     material = models.ForeignKey(PaintMaterial, on_delete=models.SET_NULL, verbose_name='Материал', null=True, blank=True)
     style = models.ForeignKey(Style, on_delete=models.SET_NULL, verbose_name='Стиль', null=True, blank=True)
@@ -132,7 +133,10 @@ class Painting(models.Model):
     height = models.PositiveIntegerField(verbose_name='Высота (см)', null=True, blank=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, verbose_name='Автор', null=True, blank=True)
     price = models.PositiveIntegerField(verbose_name='Цена', null=True, blank=True)
-    keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True, unique=True)
+    keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
+    recommended = models.BooleanField(default=False, verbose_name='Рекомендованный', blank=True, null=True)
+    discount_price = models.PositiveIntegerField(verbose_name='Цена со скидкой', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Картина'
@@ -141,17 +145,13 @@ class Painting(models.Model):
         unique_together = (
             (
                 "title",
-                "photo",
-                "description",
                 "subject",
                 "material",
                 "style",
                 "technique",
                 "width",
                 "height",
-                "author",
-                "price",
-                "keywords"
+                "author"
             ),
         )
 
@@ -214,16 +214,19 @@ class HandicraftTechnique(models.Model):
 
 class Handicraft(models.Model):
     category = 'Handicrafts'
-    title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True, unique=True)
-    photo = models.ImageField(verbose_name='Фото', upload_to='handicrafts_images', null=True, blank=True, unique=True)
-    description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True, unique=True)
+    title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True)
+    photo = models.ImageField(verbose_name='Фото', upload_to='handicrafts_images', null=True, blank=True)
+    description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
     type = models.ForeignKey(HandicraftType, on_delete=models.SET_NULL, verbose_name='Тип изделия', null=True, blank=True)
     material = models.ForeignKey(HandicraftMaterial, on_delete=models.SET_NULL, verbose_name='Материал', null=True, blank=True)
     technique = models.ForeignKey(HandicraftTechnique, on_delete=models.SET_NULL, verbose_name='Техника', null=True, blank=True)
     color = models.ManyToManyField(Color, verbose_name='Цвет', blank=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, verbose_name='Автор', null=True, blank=True)
     price = models.PositiveIntegerField(verbose_name='Цена', null=True, blank=True)
-    keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True, unique=True)
+    keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
+    recommended = models.BooleanField(default=False, verbose_name='Рекомендованный', blank=True, null=True)
+    discount_price = models.PositiveIntegerField(verbose_name='Цена со скидкой', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Ремесленное изделие'
@@ -232,14 +235,10 @@ class Handicraft(models.Model):
         unique_together = (
             (
                 "title",
-                "photo",
-                "description",
                 "type",
                 "material",
                 "technique",
-                "author",
-                "price",
-                "keywords"
+                "author"
             ),
         )
 
@@ -296,16 +295,19 @@ class CeramicTechnique(models.Model):
 
 class Ceramic(models.Model):
     category = 'Ceramics'
-    title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True, unique=True)
-    photo = models.ImageField(verbose_name='Фото', upload_to='ceramics_images', null=True, blank=True, unique=True)
-    description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True, unique=True)
+    title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True)
+    photo = models.ImageField(verbose_name='Фото', upload_to='ceramics_images', null=True, blank=True)
+    description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
     type = models.ForeignKey(CeramicType, on_delete=models.SET_NULL, verbose_name='Тип изделия', null=True, blank=True)
     material = models.ForeignKey(CeramicMaterial, on_delete=models.SET_NULL, verbose_name='Материал', null=True, blank=True)
     technique = models.ForeignKey(CeramicTechnique, on_delete=models.SET_NULL, verbose_name='Техника', null=True, blank=True)
     color = models.ManyToManyField(Color, verbose_name='Цвет', blank=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, verbose_name='Автор', null=True, blank=True)
     price = models.PositiveIntegerField(verbose_name='Цена', null=True, blank=True)
-    keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True, unique=True)
+    keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
+    recommended = models.BooleanField(default=False, verbose_name='Рекомендованный', blank=True, null=True)
+    discount_price = models.PositiveIntegerField(verbose_name='Цена со скидкой', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Керамика'
@@ -314,14 +316,11 @@ class Ceramic(models.Model):
         unique_together = (
             (
                 "title",
-                "photo",
                 "description",
                 "type",
                 "material",
                 "technique",
-                "author",
-                "price",
-                "keywords"
+                "author"
             ),
         )
 

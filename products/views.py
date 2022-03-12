@@ -17,7 +17,7 @@ from .serializers import RegionSerializer, AuthorSerializer, ColorSerializer, \
 
 
 class PaintingViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Painting.objects.all()
+    queryset = Painting.objects.all().order_by('-id')
     serializer_class = PaintingSerializer
     pagination_class = ProductsPagination
 
@@ -25,7 +25,7 @@ class PaintingViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['title', 'description', 'color__title', 'author__region__country__title', 'author__region__title',
                      'author__name', 'keywords', 'style__title', 'subject__title', 'technique__title', 'material__title']
-    ordering_fields = ['price']
+    ordering_fields = ['price', 'created_at']
 
 
 class PaintingFilterViewSet(ObjectMultipleModelAPIViewSet):
@@ -40,7 +40,7 @@ class PaintingFilterViewSet(ObjectMultipleModelAPIViewSet):
 
 
 class HandicraftViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Handicraft.objects.all()
+    queryset = Handicraft.objects.all().order_by('-id')
     serializer_class = HandicraftSerializer
     pagination_class = ProductsPagination
 
@@ -48,7 +48,7 @@ class HandicraftViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['title', 'description', 'color__title', 'author__region__country__title', 'author__region__title',
                      'author__name', 'keywords', 'type__title', 'technique__title', 'material__title']
-    ordering_fields = ['price']
+    ordering_fields = ['price', 'created_at']
 
 
 class HandicraftFilterViewSet(ObjectMultipleModelAPIViewSet):
@@ -62,7 +62,7 @@ class HandicraftFilterViewSet(ObjectMultipleModelAPIViewSet):
 
 
 class CeramicViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Ceramic.objects.all()
+    queryset = Ceramic.objects.all().order_by('-id')
     serializer_class = CeramicSerializer
     pagination_class = ProductsPagination
 
@@ -70,7 +70,7 @@ class CeramicViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     search_fields = ['title', 'description', 'color__title', 'author__region__country__title', 'author__region__title',
                      'author__name', 'keywords', 'type__title', 'technique__title', 'material__title']
-    ordering_fields = ['price']
+    ordering_fields = ['price', 'created_at']
 
 
 class CeramicFilterViewSet(ObjectMultipleModelAPIViewSet):

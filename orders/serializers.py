@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import OrderStatus, Order
-from rest_framework.validators import UniqueValidator
 
 
 class OrderStatusSerializer(serializers.ModelSerializer):

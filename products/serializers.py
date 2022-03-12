@@ -22,10 +22,11 @@ class RegionSerializer(serializers.ModelSerializer):
 
 class AuthorSerializer(serializers.ModelSerializer):
     region = RegionSerializer()
+    created_at = serializers.ReadOnlyField()
 
     class Meta:
         model = Author
-        fields = ['name', 'about', 'region']
+        fields = ['name', 'about', 'region', 'created_at']
 
 
 class ColorSerializer(serializers.ModelSerializer):
@@ -38,6 +39,8 @@ class ColorSerializer(serializers.ModelSerializer):
 '''
     Paintings
 '''
+
+
 class SubjectSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -73,16 +76,19 @@ class PaintingSerializer(serializers.ModelSerializer):
     technique = PaintTechniqueSerializer()
     color = ColorSerializer(many=True)
     author = AuthorSerializer()
+    created_at = serializers.ReadOnlyField()
 
     class Meta:
         model = Painting
         fields = ['id', 'title', 'photo', 'description', 'keywords', 'width', 'height', 'price', 'subject', 'material',
-                  'style', 'technique', 'color', 'author']
+                  'style', 'technique', 'color', 'author', 'created_at', 'recommended', 'discount_price']
 
 
 '''
     Handicrafts
 '''
+
+
 class HandicraftTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -110,16 +116,19 @@ class HandicraftSerializer(serializers.ModelSerializer):
     technique = HandicraftTechniqueSerializer()
     color = ColorSerializer(many=True)
     author = AuthorSerializer()
+    created_at = serializers.ReadOnlyField()
 
     class Meta:
         model = Handicraft
         fields = ['id', 'title', 'photo', 'description', 'keywords', 'price', 'type', 'material', 'technique',
-                  'color', 'author']
+                  'color', 'author', 'created_at', 'recommended', 'discount_price']
 
 
 '''
     Ceramics
 '''
+
+
 class CeramicTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -147,8 +156,9 @@ class CeramicSerializer(serializers.ModelSerializer):
     technique = CeramicTechniqueSerializer()
     color = ColorSerializer(many=True)
     author = AuthorSerializer()
+    created_at = serializers.ReadOnlyField()
 
     class Meta:
         model = Ceramic
         fields = ['id', 'title', 'photo', 'description', 'keywords', 'price', 'type', 'material', 'technique',
-                  'color', 'author']
+                  'color', 'author', 'created_at', 'recommended', 'discount_price']
