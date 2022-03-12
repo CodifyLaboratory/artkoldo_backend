@@ -40,6 +40,7 @@ class Author(models.Model):
     phone_number = models.CharField(max_length=13, verbose_name='Номер телефона', null=True, blank=True, unique=True)
     about = models.TextField(verbose_name='Об авторе', null=True, blank=True, unique=True)
     region = models.ForeignKey(Region, on_delete=models.PROTECT, verbose_name='Регион', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Автора'
@@ -133,6 +134,9 @@ class Painting(models.Model):
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, verbose_name='Автор', null=True, blank=True)
     price = models.PositiveIntegerField(verbose_name='Цена', null=True, blank=True)
     keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True, unique=True)
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
+    recommended = models.BooleanField(default=False, verbose_name='Рекомендованный', blank=True, null=True)
+    discount_price = models.PositiveIntegerField(verbose_name='Цена со скидкой', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Картина'
@@ -224,6 +228,9 @@ class Handicraft(models.Model):
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, verbose_name='Автор', null=True, blank=True)
     price = models.PositiveIntegerField(verbose_name='Цена', null=True, blank=True)
     keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True, unique=True)
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
+    recommended = models.BooleanField(default=False, verbose_name='Рекомендованный', blank=True, null=True)
+    discount_price = models.PositiveIntegerField(verbose_name='Цена со скидкой', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Ремесленное изделие'
@@ -306,6 +313,9 @@ class Ceramic(models.Model):
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, verbose_name='Автор', null=True, blank=True)
     price = models.PositiveIntegerField(verbose_name='Цена', null=True, blank=True)
     keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True, unique=True)
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
+    recommended = models.BooleanField(default=False, verbose_name='Рекомендованный', blank=True, null=True)
+    discount_price = models.PositiveIntegerField(verbose_name='Цена со скидкой', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Керамика'
