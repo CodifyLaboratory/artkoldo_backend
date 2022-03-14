@@ -120,7 +120,7 @@ class PaintTechnique(models.Model):
 
 
 class Painting(models.Model):
-    category = 'Painting'
+    category = 'painting'
     title = models.CharField(max_length=100, verbose_name='Название картины', null=True, blank=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='paintings_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
@@ -213,7 +213,7 @@ class HandicraftTechnique(models.Model):
 
 
 class Handicraft(models.Model):
-    category = 'Handicraft'
+    category = 'handicraft'
     title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='handicrafts_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
@@ -294,7 +294,7 @@ class CeramicTechnique(models.Model):
 
 
 class Ceramic(models.Model):
-    category = 'Ceramic'
+    category = 'ceramic'
     title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='ceramics_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
