@@ -17,6 +17,7 @@ from .serializers import RegionSerializer, AuthorSerializer, ColorSerializer, \
 
 
 class PaintingViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Каталог Живописи """
     queryset = Painting.objects.all().order_by('-id')
     serializer_class = PaintingSerializer
     pagination_class = ProductsPagination
@@ -29,6 +30,7 @@ class PaintingViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class PaintingFilterViewSet(ObjectMultipleModelAPIViewSet):
+    """ Параметры фильтрации Живописи """
     querylist = [
         {'queryset': Subject.objects.all(), 'serializer_class': SubjectSerializer},
         {'queryset': PaintMaterial.objects.all(), 'serializer_class': PaintMaterialSerializer},
@@ -40,6 +42,7 @@ class PaintingFilterViewSet(ObjectMultipleModelAPIViewSet):
 
 
 class HandicraftViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Каталог Ремесленных изделий """
     queryset = Handicraft.objects.all().order_by('-id')
     serializer_class = HandicraftSerializer
     pagination_class = ProductsPagination
@@ -52,6 +55,7 @@ class HandicraftViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class HandicraftFilterViewSet(ObjectMultipleModelAPIViewSet):
+    """ Параметры фильтрации Ремесленных изделий """
     querylist = [
         {'queryset': HandicraftType.objects.all(), 'serializer_class': HandicraftTypeSerializer},
         {'queryset': HandicraftMaterial.objects.all(), 'serializer_class': HandicraftMaterialSerializer},
@@ -62,6 +66,7 @@ class HandicraftFilterViewSet(ObjectMultipleModelAPIViewSet):
 
 
 class CeramicViewSet(viewsets.ReadOnlyModelViewSet):
+    """ Каталог Керамики """
     queryset = Ceramic.objects.all().order_by('-id')
     serializer_class = CeramicSerializer
     pagination_class = ProductsPagination
@@ -74,6 +79,7 @@ class CeramicViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class CeramicFilterViewSet(ObjectMultipleModelAPIViewSet):
+    """ Параметры фильтрации Керамики """
     querylist = [
         {'queryset': CeramicType.objects.all(), 'serializer_class': CeramicTypeSerializer},
         {'queryset': CeramicMaterial.objects.all(), 'serializer_class': CeramicMaterialSerializer},

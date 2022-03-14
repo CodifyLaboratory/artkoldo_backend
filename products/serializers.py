@@ -40,7 +40,6 @@ class ColorSerializer(serializers.ModelSerializer):
     Paintings
 '''
 
-
 class SubjectSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -88,7 +87,6 @@ class PaintingSerializer(serializers.ModelSerializer):
     Handicrafts
 '''
 
-
 class HandicraftTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -127,7 +125,6 @@ class HandicraftSerializer(serializers.ModelSerializer):
 '''
     Ceramics
 '''
-
 
 class CeramicTypeSerializer(serializers.ModelSerializer):
 
