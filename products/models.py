@@ -43,7 +43,7 @@ class Author(models.Model):
     created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
 
     class Meta:
-        verbose_name = 'Автора'
+        verbose_name = 'Автор'
         verbose_name_plural = "Авторы"
         ordering = ['name']
         unique_together = (("name", "phone_number", "region"),)
@@ -120,7 +120,7 @@ class PaintTechnique(models.Model):
 
 
 class Painting(models.Model):
-    category = 'Paintings'
+    category = 'painting'
     title = models.CharField(max_length=100, verbose_name='Название картины', null=True, blank=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='paintings_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
@@ -213,7 +213,7 @@ class HandicraftTechnique(models.Model):
 
 
 class Handicraft(models.Model):
-    category = 'Handicrafts'
+    category = 'handicraft'
     title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='handicrafts_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
@@ -294,7 +294,7 @@ class CeramicTechnique(models.Model):
 
 
 class Ceramic(models.Model):
-    category = 'Ceramics'
+    category = 'ceramic'
     title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True)
     photo = models.ImageField(verbose_name='Фото', upload_to='ceramics_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)

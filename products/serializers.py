@@ -40,7 +40,6 @@ class ColorSerializer(serializers.ModelSerializer):
     Paintings
 '''
 
-
 class SubjectSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -80,14 +79,13 @@ class PaintingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Painting
-        fields = ['id', 'title', 'photo', 'description', 'keywords', 'width', 'height', 'price', 'subject', 'material',
+        fields = ['id', 'category', 'title', 'photo', 'description', 'keywords', 'width', 'height', 'price', 'subject', 'material',
                   'style', 'technique', 'color', 'author', 'created_at', 'recommended', 'discount_price']
 
 
 '''
     Handicrafts
 '''
-
 
 class HandicraftTypeSerializer(serializers.ModelSerializer):
 
@@ -120,14 +118,13 @@ class HandicraftSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Handicraft
-        fields = ['id', 'title', 'photo', 'description', 'keywords', 'price', 'type', 'material', 'technique',
+        fields = ['id', 'category', 'title', 'photo', 'description', 'keywords', 'price', 'type', 'material', 'technique',
                   'color', 'author', 'created_at', 'recommended', 'discount_price']
 
 
 '''
     Ceramics
 '''
-
 
 class CeramicTypeSerializer(serializers.ModelSerializer):
 
@@ -160,5 +157,5 @@ class CeramicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ceramic
-        fields = ['id', 'title', 'photo', 'description', 'keywords', 'price', 'type', 'material', 'technique',
+        fields = ['id', 'category', 'title', 'photo', 'description', 'keywords', 'price', 'type', 'material', 'technique',
                   'color', 'author', 'created_at', 'recommended', 'discount_price']
