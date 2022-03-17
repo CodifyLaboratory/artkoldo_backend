@@ -46,6 +46,9 @@ class OrderAdmin(admin.ModelAdmin):
         else:
             return []
 
+    def has_add_permission(self, request):
+        return False
+
 
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderStatus, OrderStatusAdmin)
