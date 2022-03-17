@@ -25,10 +25,6 @@ class OrderProductInline(admin.TabularInline):
         return False
 
 
-class OrderStatusAdmin(admin.ModelAdmin):
-    readonly_fields = ('id',)
-
-
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderProductInline, ]
     list_display = ('name', 'id', 'order_status', 'country', 'created_date')
