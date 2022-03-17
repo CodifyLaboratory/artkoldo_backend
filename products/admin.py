@@ -26,7 +26,18 @@ class PaintingAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Общая информация', {
-            'fields': ('id', 'title', 'photo', 'description', 'author', 'price')
+            'fields': (
+                'id',
+                'title',
+                'photo_1',
+                'photo_2',
+                'photo_3',
+                'photo_4',
+                'photo_5',
+                'description',
+                'author',
+                'price'
+            )
         }),
         ('Характеристики', {
             'fields': ('subject', 'material', 'style', 'technique', 'color', ('width', 'height')),
@@ -45,7 +56,18 @@ class HandicraftCeramicAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Общая информация', {
-            'fields': ('id', 'title', 'photo', 'description', 'author', 'price')
+            'fields': (
+                'id',
+                'title',
+                'photo_1',
+                'photo_2',
+                'photo_3',
+                'photo_4',
+                'photo_5',
+                'description',
+                'author',
+                'price'
+            )
         }),
         ('Характеристики', {
             'fields': ('type', 'material', 'technique', 'color',),
