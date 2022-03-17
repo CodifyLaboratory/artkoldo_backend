@@ -40,6 +40,7 @@ class ColorSerializer(serializers.ModelSerializer):
     Paintings
 '''
 
+
 class SubjectSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -79,13 +80,36 @@ class PaintingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Painting
-        fields = ['id', 'category', 'title', 'photo', 'description', 'keywords', 'width', 'height', 'price', 'subject', 'material',
-                  'style', 'technique', 'color', 'author', 'created_at', 'recommended', 'discount_price']
+        fields = [
+            'id',
+            'category',
+            'title',
+            'photo_1',
+            'photo_2',
+            'photo_3',
+            'photo_4',
+            'photo_5',
+            'description',
+            'keywords',
+            'width',
+            'height',
+            'price',
+            'subject',
+            'material',
+            'style',
+            'technique',
+            'color',
+            'author',
+            'created_at',
+            'recommended',
+            'discount_price'
+        ]
 
 
 '''
     Handicrafts
 '''
+
 
 class HandicraftTypeSerializer(serializers.ModelSerializer):
 
@@ -117,14 +141,34 @@ class HandicraftSerializer(serializers.ModelSerializer):
     created_at = serializers.ReadOnlyField()
 
     class Meta:
-        model = Handicraft
-        fields = ['id', 'category', 'title', 'photo', 'description', 'keywords', 'price', 'type', 'material', 'technique',
-                  'color', 'author', 'created_at', 'recommended', 'discount_price']
+        model = Painting
+        fields = [
+            'id',
+            'category',
+            'title',
+            'photo_1',
+            'photo_2',
+            'photo_3',
+            'photo_4',
+            'photo_5',
+            'description',
+            'keywords',
+            'price',
+            'type',
+            'material',
+            'technique',
+            'color',
+            'author',
+            'created_at',
+            'recommended',
+            'discount_price'
+        ]
 
 
 '''
     Ceramics
 '''
+
 
 class CeramicTypeSerializer(serializers.ModelSerializer):
 
@@ -156,6 +200,25 @@ class CeramicSerializer(serializers.ModelSerializer):
     created_at = serializers.ReadOnlyField()
 
     class Meta:
-        model = Ceramic
-        fields = ['id', 'category', 'title', 'photo', 'description', 'keywords', 'price', 'type', 'material', 'technique',
-                  'color', 'author', 'created_at', 'recommended', 'discount_price']
+        model = Painting
+        fields = [
+            'id',
+            'category',
+            'title',
+            'photo_1',
+            'photo_2',
+            'photo_3',
+            'photo_4',
+            'photo_5',
+            'description',
+            'keywords',
+            'price',
+            'type',
+            'material',
+            'technique',
+            'color',
+            'author',
+            'created_at',
+            'recommended',
+            'discount_price'
+        ]
