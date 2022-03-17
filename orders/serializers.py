@@ -1,5 +1,9 @@
+from drf_writable_nested import WritableNestedModelSerializer
 from rest_framework import serializers
-from .models import OrderStatus, Order
+from .models import OrderStatus, Order, OrderProduct
+from products.models import Painting, Handicraft, Ceramic
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 
 class OrderStatusSerializer(serializers.ModelSerializer):
@@ -10,38 +14,35 @@ class OrderStatusSerializer(serializers.ModelSerializer):
         fields = ['id', 'title']
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    created_date = serializers.ReadOnlyField()
-    order_status = OrderStatusSerializer(default=1)
+class OrderProductSerializer(WritableNestedModelSerializer):
+    order = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = OrderProduct
+        fields = ['id', 'order', 'link', 'product_category', 'product_id', 'quantity', 'price']
+
+    def create(self, validated_data):
+        prod_name = ''
+        if validated_data['product_category'] == 'painting':
+            prod_name = f"Картина: {Painting.objects.get(id=validated_data['product_id'])}"
+        elif validated_data['product_category'] == 'handicraft':
+            prod_name = f"Ремесленное изделие: {Handicraft.objects.get(id=validated_data['product_id'])}"
+        elif validated_data['product_category'] == 'ceramic':
+            prod_name = f"Керамика: {Ceramic.objects.get(id=validated_data['product_id'])}"
+        display_text = ", ".join([
+            "<a href={}>{}</a>".format(
+                reverse('admin:{}_{}_change'.format('products', validated_data['product_category']),
+                        args=(validated_data['product_id'],)),
+                prod_name)
+        ])
+        order_product = OrderProduct.objects.create(link=mark_safe(display_text), **validated_data)
+        return order_product
+
+
+class OrderSerializer(WritableNestedModelSerializer):
+    order_products = OrderProductSerializer(many=True, required=False)
 
     class Meta:
         model = Order
-        fields = '__all__'
-
-    def validate(self, attrs):
-        attrs = super().validate(attrs)
-        total_price = attrs['total_price']
-        if total_price <= 0:
-            raise serializers.ValidationError(
-                detail='Итоговая стоимость заказа не может иметь отрицательное значение.',
-                code='negative_number_value'
-            )
-        return attrs
-
-    def create(self, validated_data):
-        order = Order.objects.create(
-            name=validated_data['name'],
-            email=validated_data['email'],
-            phone=validated_data['phone'],
-            country=validated_data['country'],
-            region=validated_data['region'],
-            city=validated_data['city'],
-            comment=validated_data['comment'],
-            total_price=validated_data['total_price'],
-            quantity=validated_data['quantity'],
-            price=validated_data['price'],
-            products_id=validated_data['products_id'],
-            product_name=validated_data['product_name'],
-            products_category=validated_data['products_category']
-        )
-        return order
+        fields = ['id', 'name', 'email', 'phone', 'country', 'region', 'city', 'comment', 'created_date', 'total_price',
+                  'order_status', 'order_products']
