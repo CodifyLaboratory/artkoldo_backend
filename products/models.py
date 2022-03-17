@@ -122,11 +122,7 @@ class PaintTechnique(models.Model):
 class Painting(models.Model):
     category = 'painting'
     title = models.CharField(max_length=100, verbose_name='Название картины', null=True, blank=True)
-    photo_1 = models.ImageField(verbose_name='Фото - 1', upload_to='paintings_images', null=True, blank=True)
-    photo_2 = models.ImageField(verbose_name='Фото - 2', upload_to='paintings_images', null=True, blank=True)
-    photo_3 = models.ImageField(verbose_name='Фото - 3', upload_to='paintings_images', null=True, blank=True)
-    photo_4 = models.ImageField(verbose_name='Фото - 4', upload_to='paintings_images', null=True, blank=True)
-    photo_5 = models.ImageField(verbose_name='Фото - 5', upload_to='paintings_images', null=True, blank=True)
+    photo = models.ImageField(verbose_name='Фото', upload_to='paintings_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.SET_NULL, verbose_name='Тема', null=True, blank=True)
     material = models.ForeignKey(PaintMaterial, on_delete=models.SET_NULL, verbose_name='Материал', null=True, blank=True)
@@ -219,11 +215,7 @@ class HandicraftTechnique(models.Model):
 class Handicraft(models.Model):
     category = 'handicraft'
     title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True)
-    photo_1 = models.ImageField(verbose_name='Фото - 1', upload_to='paintings_images', null=True, blank=True)
-    photo_2 = models.ImageField(verbose_name='Фото - 2', upload_to='paintings_images', null=True, blank=True)
-    photo_3 = models.ImageField(verbose_name='Фото - 3', upload_to='paintings_images', null=True, blank=True)
-    photo_4 = models.ImageField(verbose_name='Фото - 4', upload_to='paintings_images', null=True, blank=True)
-    photo_5 = models.ImageField(verbose_name='Фото - 5', upload_to='paintings_images', null=True, blank=True)
+    photo = models.ImageField(verbose_name='Фото', upload_to='handicrafts_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
     type = models.ForeignKey(HandicraftType, on_delete=models.SET_NULL, verbose_name='Тип изделия', null=True, blank=True)
     material = models.ForeignKey(HandicraftMaterial, on_delete=models.SET_NULL, verbose_name='Материал', null=True, blank=True)
@@ -304,11 +296,7 @@ class CeramicTechnique(models.Model):
 class Ceramic(models.Model):
     category = 'ceramic'
     title = models.CharField(max_length=100, verbose_name='Название изделия', null=True, blank=True)
-    photo_1 = models.ImageField(verbose_name='Фото - 1', upload_to='paintings_images', null=True, blank=True)
-    photo_2 = models.ImageField(verbose_name='Фото - 2', upload_to='paintings_images', null=True, blank=True)
-    photo_3 = models.ImageField(verbose_name='Фото - 3', upload_to='paintings_images', null=True, blank=True)
-    photo_4 = models.ImageField(verbose_name='Фото - 4', upload_to='paintings_images', null=True, blank=True)
-    photo_5 = models.ImageField(verbose_name='Фото - 5', upload_to='paintings_images', null=True, blank=True)
+    photo = models.ImageField(verbose_name='Фото', upload_to='ceramics_images', null=True, blank=True)
     description = models.TextField(max_length=500, verbose_name='Описание', null=True, blank=True)
     type = models.ForeignKey(CeramicType, on_delete=models.SET_NULL, verbose_name='Тип изделия', null=True, blank=True)
     material = models.ForeignKey(CeramicMaterial, on_delete=models.SET_NULL, verbose_name='Материал', null=True, blank=True)
