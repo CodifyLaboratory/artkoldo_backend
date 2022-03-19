@@ -80,30 +80,24 @@ class PaintingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Painting
-        fields = [
-            'id',
-            'category',
-            'title',
-            'photo_1',
-            'photo_2',
-            'photo_3',
-            'photo_4',
-            'photo_5',
-            'description',
-            'keywords',
-            'width',
-            'height',
-            'price',
-            'subject',
-            'material',
-            'style',
-            'technique',
-            'color',
-            'author',
-            'created_at',
-            'recommended',
-            'discount_price'
-        ]
+        fields = ['id', 'category', 'title', 'photo_1', 'description', 'keywords', 'width', 'height', 'price', 'subject',
+                  'material', 'style', 'technique', 'color', 'author', 'created_at', 'recommended', 'discount_price']
+
+
+class PaintingDetailSerializer(serializers.ModelSerializer):
+    subject = SubjectSerializer()
+    material = PaintMaterialSerializer()
+    style = StyleSerializer()
+    technique = PaintTechniqueSerializer()
+    color = ColorSerializer(many=True)
+    author = AuthorSerializer()
+    created_at = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Painting
+        fields = ['id', 'category', 'title', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'description',
+                  'keywords', 'width', 'height', 'price', 'subject', 'material', 'style', 'technique', 'color',
+                  'author', 'created_at', 'recommended', 'discount_price']
 
 
 '''
@@ -133,6 +127,35 @@ class HandicraftTechniqueSerializer(serializers.ModelSerializer):
 
 
 class HandicraftSerializer(serializers.ModelSerializer):
+    type = HandicraftTypeSerializer()
+    material = HandicraftMaterialSerializer()
+    technique = HandicraftTechniqueSerializer()
+    color = ColorSerializer(many=True)
+    author = AuthorSerializer()
+    created_at = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Painting
+        fields = [
+            'id',
+            'category',
+            'title',
+            'photo_1',
+            'description',
+            'keywords',
+            'price',
+            'type',
+            'material',
+            'technique',
+            'color',
+            'author',
+            'created_at',
+            'recommended',
+            'discount_price'
+        ]
+
+
+class HandicraftDetailSerializer(serializers.ModelSerializer):
     type = HandicraftTypeSerializer()
     material = HandicraftMaterialSerializer()
     technique = HandicraftTechniqueSerializer()
@@ -192,6 +215,35 @@ class CeramicTechniqueSerializer(serializers.ModelSerializer):
 
 
 class CeramicSerializer(serializers.ModelSerializer):
+    type = CeramicTypeSerializer()
+    material = CeramicMaterialSerializer()
+    technique = CeramicTechniqueSerializer()
+    color = ColorSerializer(many=True)
+    author = AuthorSerializer()
+    created_at = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Painting
+        fields = [
+            'id',
+            'category',
+            'title',
+            'photo_1',
+            'description',
+            'keywords',
+            'price',
+            'type',
+            'material',
+            'technique',
+            'color',
+            'author',
+            'created_at',
+            'recommended',
+            'discount_price'
+        ]
+
+
+class CeramicDetailSerializer(serializers.ModelSerializer):
     type = CeramicTypeSerializer()
     material = CeramicMaterialSerializer()
     technique = CeramicTechniqueSerializer()

@@ -1,3 +1,5 @@
+from itertools import chain
+
 from rest_framework import viewsets
 from .pagination import ProductsPagination
 from drf_multiple_model.viewsets import ObjectMultipleModelAPIViewSet
@@ -13,7 +15,8 @@ from .models import Region, Author, Color, \
 from .serializers import RegionSerializer, AuthorSerializer, ColorSerializer, \
     SubjectSerializer, PaintMaterialSerializer, StyleSerializer, PaintTechniqueSerializer, PaintingSerializer, \
     HandicraftTypeSerializer, HandicraftMaterialSerializer, HandicraftTechniqueSerializer, HandicraftSerializer, \
-    CeramicTypeSerializer, CeramicMaterialSerializer, CeramicTechniqueSerializer, CeramicSerializer
+    CeramicTypeSerializer, CeramicMaterialSerializer, CeramicTechniqueSerializer, CeramicSerializer, \
+    PaintingDetailSerializer, HandicraftDetailSerializer, CeramicDetailSerializer
 
 
 class PaintingViewSet(viewsets.ReadOnlyModelViewSet):
@@ -41,6 +44,32 @@ class PaintingFilterViewSet(ObjectMultipleModelAPIViewSet):
     ]
 
 
+class PaintingDetailViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = PaintingDetailSerializer
+
+    def get_queryset(self):
+        queryset = Painting.objects.filter(id=self.kwargs['pk'])
+        return queryset
+
+
+class PaintingRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = PaintingSerializer
+
+    def get_queryset(self):
+        exclude = [self.kwargs['pk']]
+        reference = Painting.objects.get(id=self.kwargs['pk'])
+        same_author = Painting.objects.filter(author=reference.author).exclude(id__in=exclude)
+        for product in same_author: exclude.append(product.id)
+        same_subject = Painting.objects.filter(subject=reference.subject).exclude(id__in=exclude)
+        for product in same_subject: exclude.append(product.id)
+        same_style = Painting.objects.filter(style=reference.style).exclude(id__in=exclude)
+        for product in same_style: exclude.append(product.id)
+        same_technique = Painting.objects.filter(technique=reference.technique).exclude(id__in=exclude)
+        for product in same_technique: exclude.append(product.id)
+        queryset = chain(same_author, same_subject, same_style, same_technique)
+        return queryset
+
+
 class HandicraftViewSet(viewsets.ReadOnlyModelViewSet):
     """ Каталог Ремесленных изделий """
     queryset = Handicraft.objects.all().order_by('-id')
@@ -65,6 +94,32 @@ class HandicraftFilterViewSet(ObjectMultipleModelAPIViewSet):
     ]
 
 
+class HandicraftDetailViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = HandicraftDetailSerializer
+
+    def get_queryset(self):
+        queryset = Handicraft.objects.filter(id=self.kwargs['pk'])
+        return queryset
+
+
+class HandicraftRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = HandicraftSerializer
+
+    def get_queryset(self):
+        exclude = [self.kwargs['pk']]
+        reference = Handicraft.objects.get(id=self.kwargs['pk'])
+        same_author = Handicraft.objects.filter(author=reference.author).exclude(id__in=exclude)
+        for product in same_author: exclude.append(product.id)
+        same_type = Handicraft.objects.filter(type=reference.type).exclude(id__in=exclude)
+        for product in same_type: exclude.append(product.id)
+        same_material = Handicraft.objects.filter(material=reference.material).exclude(id__in=exclude)
+        for product in same_material: exclude.append(product.id)
+        same_technique = Handicraft.objects.filter(technique=reference.technique).exclude(id__in=exclude)
+        for product in same_technique: exclude.append(product.id)
+        queryset = chain(same_author, same_type, same_material, same_technique)
+        return queryset
+
+
 class CeramicViewSet(viewsets.ReadOnlyModelViewSet):
     """ Каталог Керамики """
     queryset = Ceramic.objects.all().order_by('-id')
@@ -87,3 +142,29 @@ class CeramicFilterViewSet(ObjectMultipleModelAPIViewSet):
         {'queryset': Color.objects.all(), 'serializer_class': ColorSerializer},
         {'queryset': Region.objects.all(), 'serializer_class': RegionSerializer},
     ]
+
+
+class CeramicDetailViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = CeramicDetailSerializer
+
+    def get_queryset(self):
+        queryset = Ceramic.objects.filter(id=self.kwargs['pk'])
+        return queryset
+
+
+class CeramicRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = CeramicSerializer
+
+    def get_queryset(self):
+        exclude = [self.kwargs['pk']]
+        reference = Ceramic.objects.get(id=self.kwargs['pk'])
+        same_author = Ceramic.objects.filter(author=reference.author).exclude(id__in=exclude)
+        for product in same_author: exclude.append(product.id)
+        same_type = Ceramic.objects.filter(type=reference.type).exclude(id__in=exclude)
+        for product in same_type: exclude.append(product.id)
+        same_material = Ceramic.objects.filter(material=reference.material).exclude(id__in=exclude)
+        for product in same_material: exclude.append(product.id)
+        same_technique = Ceramic.objects.filter(technique=reference.technique).exclude(id__in=exclude)
+        for product in same_technique: exclude.append(product.id)
+        queryset = chain(same_author, same_type, same_material, same_technique)
+        return queryset
