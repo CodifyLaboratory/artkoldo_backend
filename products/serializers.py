@@ -135,7 +135,7 @@ class HandicraftSerializer(serializers.ModelSerializer):
     created_at = serializers.ReadOnlyField()
 
     class Meta:
-        model = Painting
+        model = Handicraft
         fields = [
             'id',
             'category',
@@ -164,7 +164,7 @@ class HandicraftDetailSerializer(serializers.ModelSerializer):
     created_at = serializers.ReadOnlyField()
 
     class Meta:
-        model = Painting
+        model = Handicraft
         fields = [
             'id',
             'category',
@@ -223,7 +223,7 @@ class CeramicSerializer(serializers.ModelSerializer):
     created_at = serializers.ReadOnlyField()
 
     class Meta:
-        model = Painting
+        model = Ceramic
         fields = [
             'id',
             'category',
@@ -252,7 +252,7 @@ class CeramicDetailSerializer(serializers.ModelSerializer):
     created_at = serializers.ReadOnlyField()
 
     class Meta:
-        model = Painting
+        model = Ceramic
         fields = [
             'id',
             'category',
