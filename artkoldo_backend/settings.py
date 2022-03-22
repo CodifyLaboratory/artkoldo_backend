@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'drf_multiple_model',
     'django_filters',
     'corsheaders',
-
+    'drf_yasg',
     # my apps
     'products',
     'orders',
