@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     # third party
     'rest_framework',
+    'django_celery_beat',
     'drf_multiple_model',
     'django_filters',
     'corsheaders',
@@ -151,6 +152,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'back-static/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CELERY_BROKER_URL = env('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
+CELERY_BEAT_SCHEDULER = env('CELERY_BEAT_SCHEDULER')
+
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
@@ -199,3 +204,9 @@ JAZZMIN_UI_TWEAKS = {
     # "theme": "slate",
     "dark_mode_theme": "cyborg",
 }
+
+EMAIL_USE_TLS = env('EMAIL_USE_TLS')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env('EMAIL_PORT')
