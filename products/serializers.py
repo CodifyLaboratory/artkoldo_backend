@@ -26,7 +26,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Author
-        fields = ['name', 'about', 'region', 'created_at']
+        fields = ['name', 'about', 'region', 'created_at', 'photo', 'featured']
 
 
 class ColorSerializer(serializers.ModelSerializer):
