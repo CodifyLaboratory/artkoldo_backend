@@ -104,3 +104,11 @@ class PaymentDelivery(models.Model):
     class Meta:
         verbose_name = 'Оплата и доставка'
         verbose_name_plural = 'Оплата и доставка'
+
+
+class SellInfo(models.Model):
+    text = models.TextField(verbose_name='Инструкция для продавцов')
+
+    class Meta:
+        verbose_name = 'Продай уже сейчас'
+        verbose_name_plural = 'Продай уже сейчас'

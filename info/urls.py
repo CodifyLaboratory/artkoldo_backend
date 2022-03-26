@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import FounderViewSet, AboutUsViewSet, ContactsViewSet, SocialMediaViewSet, ContactFormViewSet, \
-    TermsViewSet, ForPartnersViewSet, PaymentDeliveryViewSet
+    TermsViewSet, ForPartnersViewSet, PaymentDeliveryViewSet, SellInfoViwSet
 
 
 urlpatterns = [
@@ -12,4 +12,5 @@ urlpatterns = [
     path('term/', TermsViewSet.as_view({'get': 'list'})),
     path('for_partners/', ForPartnersViewSet.as_view({'get': 'list'})),
     path('payment_delivery/', PaymentDeliveryViewSet.as_view({'get': 'list'})),
+    path('sell_info/', SellInfoViwSet.as_view({'get': 'list'})),
 ]
