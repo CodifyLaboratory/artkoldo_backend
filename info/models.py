@@ -42,11 +42,41 @@ class SocialMedia(models.Model):
         verbose_name_plural = 'Соц сети'
 
 
+class ContactFormStatus(models.Model):
+    title = models.CharField(
+        max_length=250,
+        verbose_name='Статус обратной связи',
+        unique=True,
+    )
+
+    class Meta:
+        verbose_name = 'Статус обратной связи'
+        verbose_name_plural = "Статус обратной связи"
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
+
 class ContactForm(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Имя', blank=True, null=True)
-    email = models.EmailField(verbose_name='Почта', blank=True, null=True)
-    phone_number = models.CharField(max_length=14, verbose_name='Номер телефона', blank=True, null=True)
-    comment = models.TextField(verbose_name='Комментарий', blank=True, null=True)
+    name = models.CharField(max_length=100, verbose_name='Имя', null=True)
+    email = models.EmailField(verbose_name='Почта', null=True)
+    phone_number = models.CharField(max_length=14, verbose_name='Номер телефона', null=True)
+    comment = models.TextField(null=True, verbose_name='Комментарий')
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания')
+    status = models.ForeignKey(
+        ContactFormStatus,
+        on_delete=models.CASCADE,
+        verbose_name='Статус обратной связи',
+        default=1
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Обратная связь'
+        verbose_name_plural = 'Обратная связь'
 
 
 class Terms(models.Model):
