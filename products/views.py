@@ -168,3 +168,19 @@ class CeramicRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
         for product in same_technique: exclude.append(product.id)
         queryset = chain(same_author, same_type, same_material, same_technique)
         return queryset
+
+
+class RecommendedProductsViewSet(ObjectMultipleModelAPIViewSet):
+    querylist = [
+        {'queryset': Painting.objects.filter(recommended=True), 'serializer_class': PaintingSerializer},
+        {'queryset': Handicraft.objects.filter(recommended=True), 'serializer_class': PaintingSerializer},
+        {'queryset': Ceramic.objects.filter(recommended=True), 'serializer_class': PaintingSerializer},
+    ]
+
+
+class DiscountProductsViewSet(ObjectMultipleModelAPIViewSet):
+    querylist = [
+        {'queryset': Painting.objects.filter().exclude(discount_price=None), 'serializer_class': PaintingSerializer},
+        {'queryset': Handicraft.objects.filter().exclude(discount_price=None), 'serializer_class': HandicraftSerializer},
+        {'queryset': Ceramic.objects.filter().exclude(discount_price=None), 'serializer_class': CeramicSerializer},
+    ]

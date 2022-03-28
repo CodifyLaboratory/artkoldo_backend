@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import PaintingViewSet, PaintingFilterViewSet, HandicraftViewSet, HandicraftFilterViewSet, \
     CeramicViewSet, CeramicFilterViewSet, PaintingDetailViewSet, PaintingRecommendationsViewSet, \
-    HandicraftDetailViewSet, HandicraftRecommendationsViewSet, CeramicDetailViewSet, CeramicRecommendationsViewSet
+    HandicraftDetailViewSet, HandicraftRecommendationsViewSet, CeramicDetailViewSet, CeramicRecommendationsViewSet, \
+    RecommendedProductsViewSet, DiscountProductsViewSet
 
 
 urlpatterns = [
@@ -20,5 +21,9 @@ urlpatterns = [
     path('handicraft_recommendations/<int:pk>/', HandicraftRecommendationsViewSet.as_view({'get': 'list'})),
     path('ceramics/<int:pk>/', CeramicDetailViewSet.as_view({'get': 'list'})),
     path('ceramic_recommendations/<int:pk>/', CeramicRecommendationsViewSet.as_view({'get': 'list'})),
+
+    # for main page
+    path('recommended_products/', RecommendedProductsViewSet.as_view({'get': 'list'})),
+    path('discount_products/', DiscountProductsViewSet.as_view({'get': 'list'})),
 
 ]
