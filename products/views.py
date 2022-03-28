@@ -184,3 +184,11 @@ class DiscountProductsViewSet(ObjectMultipleModelAPIViewSet):
         {'queryset': Handicraft.objects.filter().exclude(discount_price=None), 'serializer_class': HandicraftSerializer},
         {'queryset': Ceramic.objects.filter().exclude(discount_price=None), 'serializer_class': CeramicSerializer},
     ]
+
+
+class LastCreatedProductsViewSet(ObjectMultipleModelAPIViewSet):
+    querylist = [
+        {'queryset': Painting.objects.all().order_by('-id')[:10], 'serializer_class': PaintingSerializer},
+        {'queryset': Handicraft.objects.all().order_by('-id')[:10], 'serializer_class': HandicraftSerializer},
+        {'queryset': Ceramic.objects.all().order_by('-id')[:10], 'serializer_class': CeramicSerializer},
+    ]
