@@ -16,6 +16,6 @@ if settings.DEBUG:
         permission_classes=(permissions.AllowAny,)
     )
 urlpatterns = [
-    path(r'swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path(r'api/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redocumentation/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
