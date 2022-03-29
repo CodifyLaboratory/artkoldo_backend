@@ -112,3 +112,12 @@ class SellInfo(models.Model):
     class Meta:
         verbose_name = 'Продай уже сейчас'
         verbose_name_plural = 'Продай уже сейчас'
+
+
+class VideoOnMainPage(models.Model):
+    description = models.TextField(verbose_name='Описание для видео')
+    link = models.URLField(verbose_name='Ссылка на видео')
+
+    class Meta:
+        verbose_name = 'Видео на главной странице'
+        verbose_name_plural = 'Видео на главной странице'

@@ -1,7 +1,9 @@
 from rest_framework import viewsets
-from .models import Founder, AboutUs, Contacts, SocialMedia, ContactForm, Terms, ForPartners, PaymentDelivery, SellInfo
+from .models import Founder, AboutUs, Contacts, SocialMedia, ContactForm, Terms, ForPartners, PaymentDelivery, \
+    SellInfo, VideoOnMainPage
 from .serializers import FounderSerializer, AboutUsSerializer, ContactsSerializer, SocialMediaSerializer, \
-    ContactFormSerializer, TermsSerializer, ForPartnersSerializer, PaymentDeliverySerializer, SellInfoSerializer
+    ContactFormSerializer, TermsSerializer, ForPartnersSerializer, PaymentDeliverySerializer, \
+    SellInfoSerializer, VideoOnMainPageSerializer
 
 
 class FounderViewSet(viewsets.ReadOnlyModelViewSet):
@@ -47,3 +49,8 @@ class PaymentDeliveryViewSet(viewsets.ReadOnlyModelViewSet):
 class SellInfoViwSet(viewsets.ReadOnlyModelViewSet):
     queryset = SellInfo.objects.all()
     serializer_class = SellInfoSerializer
+
+
+class VideoOnMainPageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = VideoOnMainPage.objects.all()
+    serializer_class = VideoOnMainPageSerializer
