@@ -22,5 +22,6 @@ def order_created(instance, created, **kwargs):
             subject=f"Заказ №{instance.id}",
             message=message,
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=["aman.aau19@gmail.com"]
+            # можно написать один или несколько адресов электронной почты. надо написать через запятую
+            recipient_list=["artkoldoo2022@gmail.com", 'chenye797@gmail.com']
         )
