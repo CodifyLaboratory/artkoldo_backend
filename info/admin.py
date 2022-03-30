@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Founder, AboutUs, Contacts, SocialMedia, Terms, ForPartners, PaymentDelivery, ContactForm, \
-    ContactFormStatus, SellInfo
+    ContactFormStatus, SellInfo, VideoOnMainPage
 
 
 class InfoAdmin(admin.ModelAdmin):
@@ -40,3 +40,4 @@ admin.site.register(PaymentDelivery, InfoAdmin)
 admin.site.register(ContactForm, ContactFormAdmin)
 admin.site.register(ContactFormStatus, ContactFormStatusAdmin)
 admin.site.register(SellInfo, InfoAdmin)
+admin.site.register(VideoOnMainPage, InfoAdmin)

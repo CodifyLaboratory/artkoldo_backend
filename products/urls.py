@@ -2,7 +2,7 @@ from django.urls import path
 from .views import PaintingViewSet, PaintingFilterViewSet, HandicraftViewSet, HandicraftFilterViewSet, \
     CeramicViewSet, CeramicFilterViewSet, PaintingDetailViewSet, PaintingRecommendationsViewSet, \
     HandicraftDetailViewSet, HandicraftRecommendationsViewSet, CeramicDetailViewSet, CeramicRecommendationsViewSet, \
-    RecommendedProductsViewSet, DiscountProductsViewSet, LastCreatedProductsViewSet
+    RecommendedProductsViewSet, DiscountProductsViewSet, LastCreatedProductsViewSet, AuthorViewSet
 
 
 urlpatterns = [
@@ -26,5 +26,5 @@ urlpatterns = [
     path('recommended_products/', RecommendedProductsViewSet.as_view({'get': 'list'})),
     path('discount_products/', DiscountProductsViewSet.as_view({'get': 'list'})),
     path('last_created_products/', LastCreatedProductsViewSet.as_view({'get': 'list'})),
-
+    path('authors/', AuthorViewSet.as_view({'get': 'list'})),
 ]

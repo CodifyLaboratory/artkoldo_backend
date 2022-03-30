@@ -23,6 +23,7 @@ class RegionSerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     region = RegionSerializer()
     created_at = serializers.ReadOnlyField()
+    featured = serializers.ReadOnlyField()
 
     class Meta:
         model = Author

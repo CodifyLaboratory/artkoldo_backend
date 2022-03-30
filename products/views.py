@@ -192,3 +192,11 @@ class LastCreatedProductsViewSet(ObjectMultipleModelAPIViewSet):
         {'queryset': Handicraft.objects.all().order_by('-id')[:10], 'serializer_class': HandicraftSerializer},
         {'queryset': Ceramic.objects.all().order_by('-id')[:10], 'serializer_class': CeramicSerializer},
     ]
+
+
+class AuthorViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = AuthorSerializer
+
+    def get_queryset(self):
+        queryset = Author.objects.filter(featured=True)
+        return queryset

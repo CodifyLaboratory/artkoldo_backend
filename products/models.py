@@ -42,7 +42,7 @@ class Author(models.Model):
     region = models.ForeignKey(Region, on_delete=models.PROTECT, verbose_name='Регион', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
     photo = models.ImageField(verbose_name='фото мастера', blank=True, null=True, upload_to='author photo')
-    featured = models.BooleanField(blank=True, null=True, verbose_name='показанный')
+    featured = models.BooleanField(blank=True, null=True, verbose_name='показанный', default=False)
 
     class Meta:
         verbose_name = 'Автор'
