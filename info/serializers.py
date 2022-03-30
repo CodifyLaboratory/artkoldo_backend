@@ -1,13 +1,6 @@
 from rest_framework import serializers
-from .models import Founder, AboutUs, Contacts, SocialMedia, ContactForm, Terms, ForPartners, PaymentDelivery, \
+from .models import AboutUs, Contacts, SocialMedia, ContactForm, Terms, ForPartners, PaymentDelivery, \
     ContactFormStatus, SellInfo, VideoOnMainPage
-
-
-class FounderSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Founder
-        fields = '__all__'
 
 
 class AboutUsSerializer(serializers.ModelSerializer):

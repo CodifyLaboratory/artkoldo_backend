@@ -27,5 +27,4 @@ urlpatterns = [
     path('discount_products/', DiscountProductsViewSet.as_view({'get': 'list'})),
     path('last_created_products/', LastCreatedProductsViewSet.as_view({'get': 'list'})),
     path('authors/', AuthorViewSet.as_view({'get': 'list'})),
-
 ]
