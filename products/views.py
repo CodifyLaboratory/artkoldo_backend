@@ -49,16 +49,8 @@ class PaintingDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PaintingDetailSerializer
 
     def get_object(self, queryset=None):
-        obj = get_object_or_404(Painting, id=self.kwargs['pk'])
-        return obj
-
-    # def get_queryset(self):
-    #     # queryset = Painting.objects.filter(id=self.kwargs['pk'])
-    #     queryset = get_object_or_404(Painting, pk=self.kwargs['pk'])
-    #     print(self.kwargs['pk'])
-    #     print(queryset)
-    #     print(get_object_or_404(Painting, pk=self.kwargs['pk']))
-    #     return get_object_or_404(Painting, pk=self.kwargs['pk'])
+        painting = get_object_or_404(Painting, id=self.kwargs['pk'])
+        return painting
 
 
 class PaintingRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -107,8 +99,8 @@ class HandicraftDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = HandicraftDetailSerializer
 
     def get_object(self, queryset=None):
-        obj = get_object_or_404(Handicraft, id=self.kwargs['pk'])
-        return obj
+        handicraft = get_object_or_404(Handicraft, id=self.kwargs['pk'])
+        return handicraft
 
 
 class HandicraftRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -157,8 +149,8 @@ class CeramicDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CeramicDetailSerializer
 
     def get_object(self, queryset=None):
-        obj = get_object_or_404(Ceramic, id=self.kwargs['pk'])
-        return obj
+        ceramic = get_object_or_404(Ceramic, id=self.kwargs['pk'])
+        return ceramic
 
 
 class CeramicRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):

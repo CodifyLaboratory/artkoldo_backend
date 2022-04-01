@@ -17,9 +17,9 @@ urlpatterns = [
     # Product page and recommendations
     path('paintings/<int:pk>/', PaintingDetailViewSet.as_view({'get': 'retrieve'})),
     path('painting_recommendations/<int:pk>/', PaintingRecommendationsViewSet.as_view({'get': 'list'})),
-    path('handicrafts/<int:pk>/', HandicraftDetailViewSet.as_view({'get': 'list'})),
+    path('handicrafts/<int:pk>/', HandicraftDetailViewSet.as_view({'get': 'retrieve'})),
     path('handicraft_recommendations/<int:pk>/', HandicraftRecommendationsViewSet.as_view({'get': 'list'})),
-    path('ceramics/<int:pk>/', CeramicDetailViewSet.as_view({'get': 'list'})),
+    path('ceramics/<int:pk>/', CeramicDetailViewSet.as_view({'get': 'retrieve'})),
     path('ceramic_recommendations/<int:pk>/', CeramicRecommendationsViewSet.as_view({'get': 'list'})),
 
     # for main page
