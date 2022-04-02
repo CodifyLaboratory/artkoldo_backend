@@ -44,5 +44,5 @@ class OrderSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'name', 'email', 'phone', 'country', 'region', 'city', 'comment', 'created_date', 'total_price',
+        fields = ['id', 'name', 'email', 'phone', 'country', 'region', 'city', 'created_date', 'total_price',
                   'order_status', 'order_products']

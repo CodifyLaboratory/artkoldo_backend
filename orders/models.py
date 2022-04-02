@@ -20,7 +20,6 @@ class Order(models.Model):
     country = models.CharField(max_length=250, verbose_name='Страна доставки')
     region = models.CharField(max_length=250, verbose_name='Область')
     city = models.CharField(max_length=250, verbose_name='Город/Населенный пункт')
-    comment = models.CharField(max_length=255, verbose_name='Комментарии к заказу')
     created_date = models.DateTimeField(verbose_name='Дата создания заказа', auto_now_add=True)
     total_price = models.FloatField(verbose_name='Итоговая стоимость заказа')
     order_status = models.ForeignKey(OrderStatus, on_delete=models.CASCADE, verbose_name='Статус заказа', default=1)
