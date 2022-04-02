@@ -3,6 +3,7 @@ from itertools import chain
 from rest_framework import viewsets
 from .pagination import ProductsPagination
 from drf_multiple_model.viewsets import ObjectMultipleModelAPIViewSet
+from django.shortcuts import get_object_or_404
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -47,9 +48,9 @@ class PaintingFilterViewSet(ObjectMultipleModelAPIViewSet):
 class PaintingDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PaintingDetailSerializer
 
-    def get_queryset(self):
-        queryset = Painting.objects.filter(id=self.kwargs['pk'])
-        return queryset
+    def get_object(self, queryset=None):
+        painting = get_object_or_404(Painting, id=self.kwargs['pk'])
+        return painting
 
 
 class PaintingRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -97,9 +98,9 @@ class HandicraftFilterViewSet(ObjectMultipleModelAPIViewSet):
 class HandicraftDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = HandicraftDetailSerializer
 
-    def get_queryset(self):
-        queryset = Handicraft.objects.filter(id=self.kwargs['pk'])
-        return queryset
+    def get_object(self, queryset=None):
+        handicraft = get_object_or_404(Handicraft, id=self.kwargs['pk'])
+        return handicraft
 
 
 class HandicraftRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -147,9 +148,9 @@ class CeramicFilterViewSet(ObjectMultipleModelAPIViewSet):
 class CeramicDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CeramicDetailSerializer
 
-    def get_queryset(self):
-        queryset = Ceramic.objects.filter(id=self.kwargs['pk'])
-        return queryset
+    def get_object(self, queryset=None):
+        ceramic = get_object_or_404(Ceramic, id=self.kwargs['pk'])
+        return ceramic
 
 
 class CeramicRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
