@@ -35,13 +35,13 @@ class OrderAdmin(admin.ModelAdmin):
             'fields': ('name', 'email', 'phone', 'country', 'region', 'city')
         }),
         ('О заказе', {
-            'fields': ('comment', 'created_date', 'order_status', 'total_price'),
+            'fields': ('created_date', 'order_status', 'total_price'),
         })
     )
 
     def get_readonly_fields(self, request, obj=None):
         if obj:
-            return ['name', 'email', 'phone', 'country', 'region', 'city', 'comment', 'created_date', 'get_product',
+            return ['name', 'email', 'phone', 'country', 'region', 'city', 'created_date', 'get_product',
                     'total_price']
         else:
             return []
