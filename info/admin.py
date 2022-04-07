@@ -10,6 +10,9 @@ class InfoAdmin(admin.ModelAdmin):
         else:
             return True
 
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 class FounderAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
