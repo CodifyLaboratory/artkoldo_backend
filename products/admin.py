@@ -33,7 +33,6 @@ class PaintingAdmin(admin.ModelAdmin):
                 'photo_2',
                 'photo_3',
                 'photo_4',
-                'photo_5',
                 'description',
                 'author',
                 'price'
@@ -63,7 +62,6 @@ class HandicraftCeramicAdmin(admin.ModelAdmin):
                 'photo_2',
                 'photo_3',
                 'photo_4',
-                'photo_5',
                 'description',
                 'author',
                 'price'
