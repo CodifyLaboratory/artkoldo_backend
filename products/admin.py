@@ -13,9 +13,10 @@ class SiteAdmin(admin.ModelAdmin):
 
 class AuthorAdmin(admin.ModelAdmin):
     readonly_fields = ('id', 'created_at', 'get_html_photo',)
-    list_display = ('name', 'id', 'region', 'get_html_photo',)
+    list_display = ('name', 'id', 'region', 'get_html_photo', 'featured')
     list_filter = ('name', 'region__country')
     fields = ('name', 'phone_number', 'about', 'region', 'photo', 'get_html_photo', 'featured')
+    list_editable = ('featured',)
 
     def get_html_photo(self, object):
         if object.photo:
@@ -99,7 +100,7 @@ class HandicraftCeramicAdmin(admin.ModelAdmin):
             return mark_safe(f"<img src='{object.photo_1.url}' width=50>")
 
     get_html_photo.short_description = 'Фото - 1'
-    
+
 
 """ Общие """
 admin.site.register(Country, SiteAdmin)
