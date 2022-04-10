@@ -96,7 +96,7 @@ class PaintingDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Painting
-        fields = ['id', 'category', 'title', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'photo_5', 'description',
+        fields = ['id', 'category', 'title', 'photo_1', 'photo_2', 'photo_3', 'photo_4', 'description',
                   'keywords', 'width', 'height', 'price', 'subject', 'material', 'style', 'technique', 'color',
                   'author', 'created_at', 'recommended', 'discount_price']
 
@@ -174,7 +174,6 @@ class HandicraftDetailSerializer(serializers.ModelSerializer):
             'photo_2',
             'photo_3',
             'photo_4',
-            'photo_5',
             'description',
             'keywords',
             'price',
@@ -262,7 +261,6 @@ class CeramicDetailSerializer(serializers.ModelSerializer):
             'photo_2',
             'photo_3',
             'photo_4',
-            'photo_5',
             'description',
             'keywords',
             'price',
