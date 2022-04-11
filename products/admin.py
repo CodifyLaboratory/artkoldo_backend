@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
+
 from .models import Country, Region, Author, Color
 from .models import Subject, PaintMaterial, Style, PaintTechnique, Painting
 from .models import HandicraftType, HandicraftMaterial, HandicraftTechnique, Handicraft
@@ -10,9 +12,17 @@ class SiteAdmin(admin.ModelAdmin):
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    readonly_fields = ('id', 'created_at')
-    list_display = ('name', 'id', 'region',)
+    readonly_fields = ('id', 'created_at', 'get_html_photo',)
+    list_display = ('name', 'id', 'region', 'get_html_photo', 'featured')
     list_filter = ('name', 'region__country')
+    fields = ('name', 'phone_number', 'about', 'region', 'photo', 'get_html_photo', 'featured')
+    list_editable = ('featured',)
+
+    def get_html_photo(self, object):
+        if object.photo:
+            return mark_safe(f"<img src='{object.photo.url}' width=50>")
+
+    get_html_photo.short_description = 'фото мастера'
 
 
 class CountryAdmin(admin.ModelAdmin):
@@ -21,8 +31,9 @@ class CountryAdmin(admin.ModelAdmin):
 
 
 class PaintingAdmin(admin.ModelAdmin):
-    list_display = ('title', 'id', 'author', 'recommended', 'created_at')
+    list_display = ('title', 'id', 'author', 'recommended', 'created_at', 'get_html_photo')
     readonly_fields = ('id', 'created_at')
+    list_editable = ('recommended',)
 
     fieldsets = (
         ('Общая информация', {
@@ -48,10 +59,17 @@ class PaintingAdmin(admin.ModelAdmin):
 
     list_filter = ('recommended', 'author', 'author__region', 'color')
 
+    def get_html_photo(self, object):
+        if object.photo_1:
+            return mark_safe(f"<img src='{object.photo_1.url}' width=50>")
+
+    get_html_photo.short_description = 'Фото - 1'
+
 
 class HandicraftCeramicAdmin(admin.ModelAdmin):
-    list_display = ('title', 'id', 'author', 'recommended', 'created_at')
+    list_display = ('title', 'id', 'author', 'recommended', 'created_at', 'get_html_photo')
     readonly_fields = ('id', 'created_at')
+    list_editable = ('recommended',)
 
     fieldsets = (
         ('Общая информация', {
@@ -76,6 +94,12 @@ class HandicraftCeramicAdmin(admin.ModelAdmin):
     )
 
     list_filter = ('recommended', 'author', 'author__region', 'color')
+
+    def get_html_photo(self, object):
+        if object.photo_1:
+            return mark_safe(f"<img src='{object.photo_1.url}' width=50>")
+
+    get_html_photo.short_description = 'Фото - 1'
 
 
 """ Общие """
