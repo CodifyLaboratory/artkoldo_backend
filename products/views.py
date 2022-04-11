@@ -174,8 +174,8 @@ class CeramicRecommendationsViewSet(viewsets.ReadOnlyModelViewSet):
 class RecommendedProductsViewSet(ObjectMultipleModelAPIViewSet):
     querylist = [
         {'queryset': Painting.objects.filter(recommended=True), 'serializer_class': PaintingSerializer},
-        {'queryset': Handicraft.objects.filter(recommended=True), 'serializer_class': PaintingSerializer},
-        {'queryset': Ceramic.objects.filter(recommended=True), 'serializer_class': PaintingSerializer},
+        {'queryset': Handicraft.objects.filter(recommended=True), 'serializer_class': HandicraftSerializer},
+        {'queryset': Ceramic.objects.filter(recommended=True), 'serializer_class': CeramicSerializer},
     ]
 
 
