@@ -137,7 +137,7 @@ class Painting(models.Model):
     width = models.PositiveIntegerField(verbose_name='Ширина (см)', null=True, blank=True)
     height = models.PositiveIntegerField(verbose_name='Высота (см)', null=True, blank=True)
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, verbose_name='Автор', null=True, blank=True)
-    price = models.PositiveIntegerField(verbose_name='Цена', null=True, blank=True)
+    price = models.PositiveIntegerField(verbose_name='Цена')
     keywords = models.CharField(max_length=100, verbose_name='Ключевые слова', null=True, blank=True)
     created_at = models.DateTimeField(auto_now=True, verbose_name='Дата создания', blank=True, null=True)
     recommended = models.BooleanField(default=False, verbose_name='Рекомендованный', blank=True, null=True)
