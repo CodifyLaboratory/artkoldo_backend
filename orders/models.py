@@ -9,6 +9,9 @@ class OrderStatus(models.Model):
         verbose_name_plural = "Статусы заказа"
         ordering = ['title']
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return self.title
 

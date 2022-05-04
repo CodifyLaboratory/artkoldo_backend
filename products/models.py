@@ -14,6 +14,9 @@ class Country(models.Model):
         verbose_name_plural = "Страны"
         ordering = ['title']
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return self.title
 
@@ -30,6 +33,9 @@ class Region(models.Model):
         в базу данных не будет добавлять повторяющиеся значения
         """
         unique_together = (("title", "country"),)
+
+    def clean(self):
+        self.title = self.title.capitalize()
 
     def __str__(self):
         return f'{self.title}, {self.country}'
@@ -50,6 +56,9 @@ class Author(models.Model):
         ordering = ['name']
         unique_together = (("name", "phone_number", "region"),)
 
+    def clean(self):
+        self.name = self.name.capitalize()
+
     def __str__(self):
         return self.name
 
@@ -63,6 +72,9 @@ class Color(models.Model):
         verbose_name_plural = "Цвета"
         ordering = ['title']
         unique_together = (("title", "code"),)
+
+    def clean(self):
+        self.title = self.title.capitalize()
 
     def __str__(self):
         return self.title
@@ -81,6 +93,9 @@ class Subject(models.Model):
         verbose_name_plural = "Темы картины"
         ordering = ['title']
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return self.title
 
@@ -92,6 +107,9 @@ class PaintMaterial(models.Model):
         verbose_name = 'Материал живописи'
         verbose_name_plural = "Материалы живописи"
         ordering = ['title']
+
+    def clean(self):
+        self.title = self.title.capitalize()
 
     def __str__(self):
         return self.title
@@ -105,6 +123,9 @@ class Style(models.Model):
         verbose_name_plural = "Стили живописи"
         ordering = ['title']
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return self.title
 
@@ -116,6 +137,9 @@ class PaintTechnique(models.Model):
         verbose_name = 'Техника живописи'
         verbose_name_plural = "Техники живописи"
         ordering = ['title']
+
+    def clean(self):
+        self.title = self.title.capitalize()
 
     def __str__(self):
         return self.title
@@ -160,6 +184,9 @@ class Painting(models.Model):
             ),
         )
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return f'{self.title}, {self.author}'
 
@@ -183,6 +210,9 @@ class HandicraftType(models.Model):
         verbose_name_plural = "Типы ремесленных изделий"
         ordering = ['title']
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return self.title
 
@@ -201,6 +231,9 @@ class HandicraftMaterial(models.Model):
         verbose_name_plural = "Материалы ремесленных изделий"
         ordering = ['title']
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return self.title
 
@@ -212,6 +245,9 @@ class HandicraftTechnique(models.Model):
         verbose_name = 'Техника ремесла'
         verbose_name_plural = "Техники ремесла"
         ordering = ['title']
+
+    def clean(self):
+        self.title = self.title.capitalize()
 
     def __str__(self):
         return self.title
@@ -250,6 +286,9 @@ class Handicraft(models.Model):
             ),
         )
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return f'{self.title}, {self.author}'
 
@@ -266,6 +305,9 @@ class CeramicType(models.Model):
         verbose_name = 'Тип керамики'
         verbose_name_plural = "Типы керамики"
         ordering = ['title']
+
+    def clean(self):
+        self.title = self.title.capitalize()
 
     def __str__(self):
         return self.title
@@ -285,6 +327,9 @@ class CeramicMaterial(models.Model):
         verbose_name_plural = "Материалы керамических изделий"
         ordering = ['title']
 
+    def clean(self):
+        self.title = self.title.capitalize()
+
     def __str__(self):
         return self.title
 
@@ -296,6 +341,9 @@ class CeramicTechnique(models.Model):
         verbose_name = 'Техника создания керамики'
         verbose_name_plural = "Техники создания керамики"
         ordering = ['title']
+
+    def clean(self):
+        self.title = self.title.capitalize()
 
     def __str__(self):
         return self.title
@@ -334,6 +382,9 @@ class Ceramic(models.Model):
                 "author"
             ),
         )
+
+    def clean(self):
+        self.title = self.title.capitalize()
 
     def __str__(self):
         return f'{self.title}, {self.author}'
